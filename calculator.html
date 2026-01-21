@@ -39,7 +39,7 @@
         .get-title { color: #2ed573; }
 
         /* ITEM LIST IN BOX */
-        .item-list { flex-grow: 1; overflow-y: auto; margin-bottom: 15px; }
+        .item-list { flex-grow: 1; overflow-y: auto; margin-bottom: 15px; max-height: 400px; }
         
         .trade-item {
             display: flex; align-items: center; background: #0a0a0a; border: 1px solid #333;
@@ -86,7 +86,7 @@
 
         /* RESULT BAR */
         .result-bar {
-            width: 100%; max-width: 1100px; margin: 0 auto;
+            width: 95%; max-width: 1100px; margin: 0 auto;
             background: #111; border: 1px solid #333; padding: 20px;
             border-radius: 15px; text-align: center;
         }
@@ -120,6 +120,10 @@
         }
         .select-item:hover { background: #1a1a1a; }
         .select-item img { width: 40px; height: 40px; margin-right: 10px; }
+        .cat-tag { font-size: 0.7rem; padding: 2px 5px; border-radius: 3px; margin-left: auto; text-transform: uppercase; }
+        .tag-fruit { background: #222; color: #aaa; }
+        .tag-limited { background: #00cec9; color: #000; }
+        .tag-gamepass { background: #6c5ce7; color: #fff; }
 
         @keyframes popIn { from{opacity:0; transform:scale(0.9);} to{opacity:1; transform:scale(1);} }
     </style>
@@ -165,7 +169,7 @@
                 <button onclick="closeModal()" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">&times;</button>
             </div>
             <div style="padding: 10px;">
-                <input type="text" id="modal-search" class="modal-search" placeholder="Search item...">
+                <input type="text" id="modal-search" class="modal-search" placeholder="Search item (e.g. Eagle Glacier)...">
             </div>
             <div class="modal-body" id="modal-items"></div>
         </div>
@@ -174,8 +178,9 @@
     <script>
         const defaultImg = "https://i.ibb.co.com/G690n9m/Logo.png";
 
-        // --- DATA (Matches Index.html) ---
+        // --- FULL DATA (Fruits, Limiteds, Gamepasses) ---
         const data = [
+            // FRUITS (Have Perm Toggle)
             { name: "West Dragon", val: "3.33B", permVal: "6.65B", category: "fruit", img: defaultImg },
             { name: "East Dragon", val: "2.91B", permVal: "6.65B", category: "fruit", img: defaultImg },
             { name: "Kitsune", val: "420M", permVal: "5.81B", category: "fruit", img: defaultImg },
@@ -218,8 +223,8 @@
             { name: "Blade", val: "50K", permVal: "20M", category: "fruit", img: defaultImg },
             { name: "Spin", val: "15M", permVal: "15M", category: "fruit", img: defaultImg },
             { name: "Rocket", val: "10M", permVal: "10M", category: "fruit", img: defaultImg },
-            
-            // LIMITED & GAMEPASS (No Perm Toggle)
+
+            // LIMITEDS & SPECIALS (No Toggle)
             { name: "Perm Dragon Token", val: "3.33B", category: "limited", img: defaultImg },
             { name: "Galaxy Empyrean Kitsune", val: "4.56B", category: "limited", img: defaultImg },
             { name: "Ember West Dragon", val: "3.75B", category: "limited", img: defaultImg },
@@ -231,12 +236,37 @@
             { name: "Green Lightning", val: "140M", category: "limited", img: defaultImg },
             { name: "Werewolf", val: "345M", category: "limited", img: defaultImg },
             { name: "Super Spirit Pain", val: "570M", category: "limited", img: defaultImg },
+            { name: "Torment Pain", val: "60M", category: "limited", img: defaultImg },
+            { name: "Sadness Pain", val: "290M", category: "limited", img: defaultImg },
+            { name: "Frustration Pain", val: "200M", category: "limited", img: defaultImg },
+            { name: "Celestial Pain", val: "270M", category: "limited", img: defaultImg },
+            { name: "Eagle Requiem", val: "90M", category: "limited", img: defaultImg },
+            { name: "Eagle Glacier", val: "20M", category: "limited", img: defaultImg },
+            { name: "Eagle Matrix", val: "135M", category: "limited", img: defaultImg },
             { name: "Celebration Bomb", val: "5M", category: "limited", img: defaultImg },
+            { name: "Azura Bomb", val: "160M", category: "limited", img: defaultImg },
+            { name: "Thermite Bomb", val: "160M", category: "limited", img: defaultImg },
             { name: "Nuclear Bomb", val: "160M", category: "limited", img: defaultImg },
+            { name: "Rose Quartz Diamond", val: "60M", category: "limited", img: defaultImg },
+            { name: "Emerald Diamond", val: "50M", category: "limited", img: defaultImg },
+            { name: "Topaz Diamond", val: "50M", category: "limited", img: defaultImg },
+            { name: "Ruby Diamond", val: "30M", category: "limited", img: defaultImg },
+            { name: "Dragon Token", val: "N/A", category: "limited", img: defaultImg },
+            { name: "Eclipse", val: "N/A", category: "limited", img: defaultImg },
+            { name: "Pink Portal", val: "N/A", category: "limited", img: defaultImg },
+            { name: "Orange Portal", val: "N/A", category: "limited", img: defaultImg },
+            { name: "Parrot", val: "N/A", category: "limited", img: defaultImg },
+
+            // GAMEPASS (No Toggle)
             { name: "Fruit Notifier", val: "3.99B", category: "gamepass", img: defaultImg },
             { name: "Dark Blade", val: "840M", category: "gamepass", img: defaultImg },
             { name: "Mythical Scrolls", val: "700M", category: "gamepass", img: defaultImg },
-            { name: "+1 Fruit Storage", val: "255M", category: "gamepass", img: defaultImg }
+            { name: "Legendary Scrolls", val: "415M", category: "gamepass", img: defaultImg },
+            { name: "+1 Fruit Storage", val: "255M", category: "gamepass", img: defaultImg },
+            { name: "2x Mastery", val: "280M", category: "gamepass", img: defaultImg },
+            { name: "2x Money", val: "280M", category: "gamepass", img: defaultImg },
+            { name: "2x Boss Drops", val: "170M", category: "gamepass", img: defaultImg },
+            { name: "Fast Boats", val: "170M", category: "gamepass", img: defaultImg }
         ];
 
         // --- STATE ---
@@ -355,11 +385,19 @@
             list.innerHTML = '';
 
             data.filter(x => x.name.toLowerCase().includes(search)).forEach(item => {
+                let catClass = 'tag-fruit';
+                if(item.category === 'limited') catClass = 'tag-limited';
+                if(item.category === 'gamepass') catClass = 'tag-gamepass';
+
                 const div = document.createElement('div');
                 div.className = 'select-item';
-                div.innerHTML = `<img src="${item.img}"> <div><b>${item.name}</b> <br> <span style="color:#e1b12c">${item.val}</span></div>`;
+                div.innerHTML = `
+                    <img src="${item.img}"> 
+                    <div><b>${item.name}</b> <br> <span style="color:#e1b12c">${item.val}</span></div>
+                    <span class="cat-tag ${catClass}">${item.category}</span>
+                `;
                 div.onclick = () => {
-                    let newItem = { ...item, isPerm: false }; // Clone item, default phys
+                    let newItem = { ...item, isPerm: false }; 
                     if(activeSide === 'give') giveItems.push(newItem);
                     else getItems.push(newItem);
                     renderList(activeSide);
