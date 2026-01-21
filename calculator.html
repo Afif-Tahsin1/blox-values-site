@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Calculator | Blox Values</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        /* --- STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        body { background-color: #1a1a2e; color: #fff; padding-bottom: 50px; }
+
+        /* HEADER */
+        header {
+            background: #16213e; padding: 20px; text-align: center;
+            border-bottom: 3px solid #0f3460; display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-family: 'Fredoka', sans-serif; font-size: 1.8rem; color: #e94560; text-decoration: none;}
+        .logo span { color: #fff; }
+        .back-btn { background: #0f3460; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; }
+
+        /* CALCULATOR GRID */
+        .trade-container {
+            display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
+            max-width: 1200px; margin: 30px auto; padding: 10px;
+        }
+        
+        .trade-box {
+            background: #252a41; width: 45%; min-width: 320px;
+            border-radius: 15px; border: 2px solid #363b57; padding: 20px;
+            min-height: 400px; display: flex; flex-direction: column;
+        }
+        .box-title { text-align: center; font-size: 1.5rem; font-weight: bold; margin-bottom: 15px; text-transform: uppercase; }
+        .give-title { color: #ff4757; }
+        .get-title { color: #2ed573; }
+
+        /* ADD BUTTON */
+        .add-btn {
+            background: #0f3460; border: 2px dashed #4b5d67; color: #a4b0be;
+            width: 100%; padding: 15px; border-radius: 10px; cursor: pointer;
+            font-size: 1.2rem; transition: 0.3s; margin-bottom: 10px;
+        }
+        .add-btn:hover { background: #16213e; color: white; border-color: #e94560; }
+
+        /* SELECTED FRUIT ITEM */
+        .fruit-item {
+            display: flex; align-items: center; background: #1a1a2e;
+            padding: 10px; border-radius: 8px; margin-bottom: 8px; border: 1px solid #363b57;
+            animation: fadeIn 0.3s;
+        }
+        .fruit-img { width: 40px; height: 40px; object-fit: contain; margin-right: 10px; }
+        .fruit-info { flex-grow: 1; }
+        .f-name { font-weight: bold; font-size: 0.9rem; }
+        .f-val { color: #f1c40f; font-size: 0.85rem; }
+        .remove-btn { color: #ff4757; cursor: pointer; padding: 5px; font-size: 1.2rem; }
+
+        /* SPECIAL RARITY STYLE */
+        .special-text {
+            background: linear-gradient(to right, #FFD700, #ff6b6b, #48dbfb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+
+        /* RESULT SECTION */
+        .result-section {
+            width: 100%; text-align: center; margin-top: 20px;
+            background: #16213e; padding: 20px; border-radius: 15px; border: 2px solid #0f3460;
+        }
+        .status { font-size: 3rem; font-family: 'Fredoka', sans-serif; font-weight: bold; margin: 10px 0; }
+        .status.win { color: #2ed573; text-shadow: 0 0 15px rgba(46, 213, 115, 0.5); }
+        .status.fair { color: #f1c40f; text-shadow: 0 0 15px rgba(241, 196, 15, 0.5); }
+        .status.loss { color: #ff4757; text-shadow: 0 0 15px rgba(255, 71, 87, 0.5); }
+        
+        .val-diff { font-size: 1.2rem; color: #a4b0be; }
+
+        /* MODAL (POPUP) */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: #1a1a2e; width: 90%; max-width: 500px; height: 80vh;
+            border-radius: 15px; padding: 20px; overflow-y: auto; border: 2px solid #e94560;
+        }
+        .fruit-option {
+            display: flex; align-items: center; padding: 10px;
+            border-bottom: 1px solid #363b57; cursor: pointer; transition: 0.2s;
+        }
+        .fruit-option:hover { background: #252a41; }
+
+        /* TAB BUTTONS IN MODAL */
+        .modal-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
+        .tab-btn { background: #0f3460; border: none; color: white; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.8rem; }
+        .tab-btn.active { background: #e94560; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="value.html" class="back-btn">⬅ Values</a>
+        <a href="value.html" class="logo">Blox<span>Calc</span></a>
+        <div style="width: 80px;"></div>
+    </header>
+
+    <div class="trade-container">
+        <div class="trade-box">
+            <div class="box-title give-title">You Give</div>
+            <div id="give-list"></div>
+            <button class="add-btn" onclick="openModal('give')">+ Add Fruit</button>
+            <div style="margin-top: auto; text-align: right; border-top: 1px solid #363b57; padding-top: 10px;">
+                Total: <span id="give-total" style="color: #ff4757; font-weight: bold;">0</span>
+            </div>
+        </div>
+
+        <div class="trade-box">
+            <div class="box-title get-title">You Get</div>
+            <div id="get-list"></div>
+            <button class="add-btn" onclick="openModal('get')">+ Add Fruit</button>
+            <div style="margin-top: auto; text-align: right; border-top: 1px solid #363b57; padding-top: 10px;">
+                Total: <span id="get-total" style="color: #2ed573; font-weight: bold;">0</span>
+            </div>
+        </div>
+
+        <div class="result-section">
+            <h3>TRADE RESULT</h3>
+            <div id="trade-status" class="status">---</div>
+            <div id="trade-diff" class="val-diff">Add fruits to see result</div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h3 style="text-align: center; margin-bottom: 10px; color: #e94560;">Select Item</h3>
+            
+            <div class="modal-tabs">
+                <button class="tab-btn active" onclick="filterModal('all')">All</button>
+                <button class="tab-btn" onclick="filterModal('special')">Special</button>
+                <button class="tab-btn" onclick="filterModal('mythical')">Mythical</button>
+                <button class="tab-btn" onclick="filterModal('legendary')">Legendary</button>
+            </div>
+
+            <input type="text" id="modal-search" placeholder="Search..." style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: none; background: #0f3460; color: white;">
+            <div id="modal-list"></div>
+            <button onclick="closeModal()" style="width: 100%; padding: 10px; background: #ff4757; border: none; color: white; margin-top: 10px; border-radius: 5px; cursor: pointer;">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // --- UPDATED DATABASE ---
+        const defaultImg = "https://i.ibb.co.com/G690n9m/Logo.png"; 
+
+        const fruits = [
+            // --- MYTHICAL ---
+            { name: "Kitsune", value: "420M", rarity: "mythical", image: defaultImg },
+            { name: "Dragon Weast", value: "3.3B", rarity: "mythical", image: defaultImg },
+            { name: "Dragon East", value: "2.91B", rarity: "mythical", image: defaultImg },
+            { name: "Tiger", value: "160M", rarity: "mythical", image: defaultImg },
+            { name: "Dough", value: "30M", rarity: "mythical", image: defaultImg },
+            { name: "T-Rex", value: "20M", rarity: "mythical", image: defaultImg },
+            { name: "Spirit", value: "10M", rarity: "mythical", image: defaultImg },
+            { name: "Venom", value: "10M", rarity: "mythical", image: defaultImg },
+            { name: "Control", value: "160M", rarity: "mythical", image: defaultImg },
+            { name: "Mammoth", value: "10M", rarity: "mythical", image: defaultImg },
+            { name: "Shadow", value: "6.5M", rarity: "mythical", image: defaultImg },
+            { name: "Gravity", value: "10M", rarity: "mythical", image: defaultImg },
+
+            // --- LEGENDARY ---
+            { name: "Buddha", value: "10M", rarity: "legendary", image: defaultImg },
+            { name: "Portal", value: "10M", rarity: "legendary", image: defaultImg },
+            { name: "Blizzard", value: "5M", rarity: "legendary", image: defaultImg },
+            { name: "Lightning", value: "80M", rarity: "legendary", image: defaultImg },
+            { name: "Sound", value: "2.5M", rarity: "legendary", image: defaultImg },
+            { name: "Phoenix", value: "2.7M", rarity: "legendary", image: defaultImg },
+            { name: "Spider", value: "1.5M", rarity: "legendary", image: defaultImg },
+            { name: "Love", value: "1.5M", rarity: "legendary", image: defaultImg },
+            { name: "Quake", value: "1M", rarity: "legendary", image: defaultImg },
+            { name: "Pain", value: "10M", rarity: "legendary", image: defaultImg },
+            { name: "Creation", value: "3.5M", rarity: "legendary", image: defaultImg },
+
+            // --- RARE ---
+            { name: "Magma", value: "1.15M", rarity: "rare", image: defaultImg },
+            { name: "Ghost", value: "800K", rarity: "rare", image: defaultImg },
+            { name: "Light", value: "800K", rarity: "rare", image: defaultImg },
+            { name: "Rubber", value: "700K", rarity: "rare", image: defaultImg },
+
+            // --- UNCOMMON ---
+            { name: "Ice", value: "550K", rarity: "uncommon", image: defaultImg },
+            { name: "Dark", value: "400K", rarity: "uncommon", image: defaultImg },
+            { name: "Sand", value: "420K", rarity: "uncommon", image: defaultImg },
+            { name: "Diamond", value: "1M", rarity: "uncommon", image: defaultImg },
+            { name: "Eagle", value: "800K", rarity: "uncommon", image: defaultImg },
+            { name: "Flame", value: "250K", rarity: "uncommon", image: defaultImg },
+
+            // --- COMMON ---
+            { name: "Smoke", value: "100K", rarity: "common", image: defaultImg },
+            { name: "Spike", value: "180K", rarity: "common", image: defaultImg },
+            { name: "Bomb", value: "80K", rarity: "common", image: defaultImg },
+            { name: "Spring", value: "60K", rarity: "common", image: defaultImg },
+            { name: "Chop", value: "30K", rarity: "common", image: defaultImg },
+            { name: "Spin", value: "7K", rarity: "common", image: defaultImg },
+            { name: "Rocket", value: "5K", rarity: "common", image: defaultImg },
+
+            // --- SPECIAL (NEW) ---
+            { name: "Celebration Bomb", value: "5M", rarity: "special", image: defaultImg },
+            { name: "Nuclear Bomb", value: "160M", rarity: "special", image: defaultImg },
+            { name: "Thermit Bomb", value: "160M", rarity: "special", image: defaultImg },
+            { name: "Azura Bomb", value: "160M", rarity: "special", image: defaultImg },
+            { name: "Eagle Matrix", value: "135M", rarity: "special", image: defaultImg },
+            { name: "Eagle Glacier", value: "20M", rarity: "special", image: defaultImg },
+            { name: "Eagle Requiem", value: "90M", rarity: "special", image: defaultImg },
+            { name: "Celestial Pain", value: "270M", rarity: "special", image: defaultImg },
+            { name: "Frustration Pain", value: "200M", rarity: "special", image: defaultImg },
+            { name: "Torment Pain", value: "60M", rarity: "special", image: defaultImg },
+            { name: "Super Spirit Pain", value: "570M", rarity: "special", image: defaultImg },
+            { name: "Ruby Diamond", value: "30M", rarity: "special", image: defaultImg },
+            { name: "Topaz Diamond", value: "50M", rarity: "special", image: defaultImg },
+            { name: "Emerald Diamond", value: "50M", rarity: "special", image: defaultImg },
+            { name: "Rose Quartz Diamond", value: "60M", rarity: "special", image: defaultImg },
+            { name: "Werewolf", value: "345M", rarity: "special", image: defaultImg },
+            { name: "Green Lightning", value: "140M", rarity: "special", image: defaultImg },
+            { name: "Yellow Lightning", value: "760M", rarity: "special", image: defaultImg },
+            { name: "Red Lightning", value: "760M", rarity: "special", image: defaultImg },
+            { name: "Purple Lightning", value: "2.46B", rarity: "special", image: defaultImg },
+            { name: "Divine Portal", value: "340M", rarity: "special", image: defaultImg },
+            { name: "Crimson Kitsune", value: "3.07B", rarity: "special", image: defaultImg },
+            { name: "Ember Dragon", value: "3.75B", rarity: "special", image: defaultImg },
+            { name: "Galaxy Kitsune", value: "4.56B", rarity: "special", image: defaultImg },
+            { name: "Perm Dragon Token", value: "3.33B", rarity: "special", image: defaultImg }
+        ];
+
+        // --- STATE & UTILS ---
+        let giveItems = [];
+        let getItems = [];
+        let activeSide = null;
+        let activeFilter = 'all';
+
+        function parseVal(str) {
+            str = String(str).toUpperCase().replace(/,/g, '');
+            if (str.includes('B')) return parseFloat(str) * 1_000_000_000;
+            if (str.includes('M')) return parseFloat(str) * 1_000_000;
+            if (str.includes('K')) return parseFloat(str) * 1_000;
+            return parseFloat(str) || 0;
+        }
+
+        function formatVal(num) {
+            if (num >= 1_000_000_000) return (num / 1_000_000_000).toFixed(2) + 'B';
+            if (num >= 1_000_000) return (num / 1_000_000).toFixed(1) + 'M';
+            if (num >= 1_000) return (num / 1_000).toFixed(0) + 'K';
+            return num;
+        }
+
+        // --- UI FUNCTIONS ---
+        function openModal(side) {
+            activeSide = side;
+            document.getElementById('modal').style.display = 'flex';
+            renderModalList();
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function filterModal(category) {
+            activeFilter = category;
+            
+            // Highlight active tab
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            renderModalList();
+        }
+
+        function renderModalList() {
+            const list = document.getElementById('modal-list');
+            const search = document.getElementById('modal-search').value.toLowerCase();
+            list.innerHTML = '';
+            
+            let filteredFruits = fruits.filter(f => f.name.toLowerCase().includes(search));
+            
+            if (activeFilter !== 'all') {
+                filteredFruits = filteredFruits.filter(f => f.rarity === activeFilter);
+            }
+
+            filteredFruits.forEach(f => {
+                const isSpecial = f.rarity === 'special' ? 'special-text' : '';
+                const div = document.createElement('div');
+                div.className = 'fruit-option';
+                div.innerHTML = `
+                    <img src="${f.image}" style="width:35px; height:35px; margin-right:10px;"> 
+                    <div>
+                        <b class="${isSpecial}">${f.name}</b> <br> 
+                        <span style="color:#f1c40f; font-size:0.8rem;">${f.value}</span>
+                    </div>`;
+                div.onclick = () => addItem(f);
+                list.appendChild(div);
+            });
+        }
+        
+        document.getElementById('modal-search').addEventListener('input', renderModalList);
+
+        function addItem(fruit) {
+            if (activeSide === 'give') giveItems.push(fruit);
+            else getItems.push(fruit);
+            closeModal();
+            updateUI();
+        }
+
+        function removeItem(side, index) {
+            if (side === 'give') giveItems.splice(index, 1);
+            else getItems.splice(index, 1);
+            updateUI();
+        }
+
+        function renderList(items, elementId, side) {
+            const el = document.getElementById(elementId);
+            el.innerHTML = '';
+            items.forEach((item, index) => {
+                const isSpecial = item.rarity === 'special' ? 'special-text' : '';
+                el.innerHTML += `
+                    <div class="fruit-item">
+                        <img src="${item.image}" class="fruit-img">
+                        <div class="fruit-info">
+                            <div class="f-name ${isSpecial}">${item.name}</div>
+                            <div class="f-val">${item.value}</div>
+                        </div>
+                        <div class="remove-btn" onclick="removeItem('${side}', ${index})">✖</div>
+                    </div>
+                `;
+            });
+        }
+
+        function updateUI() {
+            renderList(giveItems, 'give-list', 'give');
+            renderList(getItems, 'get-list', 'get');
+
+            const giveTotal = giveItems.reduce((acc, item) => acc + parseVal(item.value), 0);
+            const getTotal = getItems.reduce((acc, item) => acc + parseVal(item.value), 0);
+
+            document.getElementById('give-total').innerText = formatVal(giveTotal);
+            document.getElementById('get-total').innerText = formatVal(getTotal);
+
+            calculateResult(giveTotal, getTotal);
+        }
+
+        function calculateResult(give, get) {
+            const statusEl = document.getElementById('trade-status');
+            const diffEl = document.getElementById('trade-diff');
+
+            if (give === 0 && get === 0) {
+                statusEl.innerText = "---";
+                statusEl.className = "status";
+                diffEl.innerText = "Add fruits to see result";
+                return;
+            }
+
+            const diff = get - give;
+            const diffStr = formatVal(Math.abs(diff));
+            
+            // Logic for W / F / L
+            const percentage = give === 0 ? 100 : (get / give) * 100;
+
+            if (percentage >= 140) {
+                statusEl.innerText = "BIG WIN 🚀";
+                statusEl.className = "status win";
+                diffEl.innerText = `You gain +${diffStr} value!`;
+            } else if (percentage >= 105) {
+                statusEl.innerText = "WIN (W) ✅";
+                statusEl.className = "status win";
+                diffEl.innerText = `You gain +${diffStr} value.`;
+            } else if (percentage >= 90) {
+                statusEl.innerText = "FAIR (F) ⚖️";
+                statusEl.className = "status fair";
+                diffEl.innerText = `Equal Trade.`;
+            } else if (percentage >= 70) {
+                statusEl.innerText = "SMALL L ⚠️";
+                statusEl.className = "status fair";
+                diffEl.innerText = `You lose -${diffStr} value.`;
+            } else {
+                statusEl.innerText = "BIG LOSS (L) ❌";
+                statusEl.className = "status loss";
+                diffEl.innerText = `Don't do it! You lose -${diffStr}!`;
+            }
+        }
+    </script>
+</body>
+</html>
