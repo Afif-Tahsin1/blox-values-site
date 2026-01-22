@@ -9,100 +9,100 @@
     <style>
         /* --- BASIC RESET --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
-        body { background-color: #0f0c29; color: #fff; padding-bottom: 50px; background-image: linear-gradient(315deg, #0f0c29 0%, #302b63 74%); min-height: 100vh; }
+        body { background-color: #050505; color: #fff; padding-bottom: 50px; font-size: 14px; }
 
         /* HEADER */
-        header { background: rgba(0,0,0,0.5); padding: 25px; text-align: center; border-bottom: 2px solid #ffd700; backdrop-filter: blur(10px); }
-        .logo { font-family: 'Fredoka', sans-serif; font-size: 2.5rem; color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
-        .logo span { color: #fff; }
+        header { background: #000; padding: 20px; text-align: center; border-bottom: 2px solid #333; }
+        .logo { font-family: 'Fredoka', sans-serif; font-size: 2.2rem; color: #fff; }
+        .logo span { color: #a29bfe; }
 
         /* CONTROLS */
-        .controls { max-width: 900px; margin: 20px auto; padding: 0 15px; text-align: center; }
-        .search-box { width: 100%; padding: 15px; border-radius: 30px; border: 1px solid #ffd700; background: rgba(255,255,255,0.1); color: white; font-size: 1.1rem; outline: none; margin-bottom: 20px; text-align: center; }
+        .controls { max-width: 1000px; margin: 20px auto; padding: 0 15px; text-align: center; }
+        .search-box { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #111; color: white; font-size: 1rem; outline: none; margin-bottom: 20px; }
         
-        .filter-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-        .filter-btn { background: #202040; border: 1px solid #444; color: #ccc; padding: 8px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-weight: bold; }
-        .filter-btn:hover, .filter-btn.active { background: #ffd700; color: #000; border-color: #ffd700; }
-        .filter-btn.special-btn { border-color: #ff4757; color: #ff4757; }
-        .filter-btn.special-btn.active { background: #ff4757; color: white; }
+        .filter-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+        .filter-btn { background: #111; border: 1px solid #333; color: #ccc; padding: 6px 12px; border-radius: 5px; cursor: pointer; transition: 0.2s; font-weight: bold; font-size: 0.9rem; }
+        .filter-btn:hover, .filter-btn.active { background: #a29bfe; color: #000; border-color: #a29bfe; }
+        .filter-btn.special-btn { border-color: #00cec9; color: #00cec9; }
+        .filter-btn.special-btn.active { background: #00cec9; color: black; }
 
         /* GRID */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 15px; max-width: 1200px; margin: 0 auto; padding: 15px; }
 
         /* CARD */
-        .card { background: #202040; border-radius: 15px; overflow: hidden; position: relative; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .card { background: #000; border: 1px solid #222; border-radius: 10px; overflow: hidden; position: relative; padding: 15px; transition: 0.2s; }
+        .card:hover { border-color: #a29bfe; transform: translateY(-3px); }
 
-        /* RARITY COLORS */
-        .bg-Mythical { border-top: 5px solid #ff4757; }
-        .bg-Legendary { border-top: 5px solid #a29bfe; }
-        .bg-Rare { border-top: 5px solid #54a0ff; }
-        .bg-Uncommon { border-top: 5px solid #dfe6e9; }
-        .bg-Common { border-top: 5px solid #b2bec3; }
-        .bg-Limited { border-top: 5px solid #ffd700; background: linear-gradient(180deg, #2c2000 0%, #202040 100%); }
-        .bg-Gamepass { border-top: 5px solid #2ed573; background: linear-gradient(180deg, #002910 0%, #202040 100%); }
-
-        /* BADGES */
-        .demand-badge { position: absolute; top: 10px; right: 10px; padding: 3px 8px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
-        .demand-10 { background: #ff4757; } 
-        .demand-mid { background: #ffa502; } 
-        .demand-low { background: #2ed573; }
-
-        .rarity-badge { position: absolute; top: 10px; left: 10px; padding: 3px 8px; border-radius: 5px; font-size: 0.7rem; font-weight: bold; background: rgba(0,0,0,0.5); border: 1px solid #555; text-transform: uppercase; }
+        /* RARITY TAGS */
+        .rarity-tag {
+            position: absolute; top: 0; left: 0; right: 0;
+            text-align: center; font-size: 0.7rem; font-weight: bold;
+            padding: 3px; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .bg-Mythical { background: #ff4757; }
+        .bg-Legendary { background: #e1b12c; color: black; } 
+        .bg-Rare { background: #3742fa; }
+        .bg-Uncommon { background: #2ed573; color: black; }
+        .bg-Common { background: #747d8c; }
+        .bg-Limited { background: #00cec9; color: black; }
+        .bg-Gamepass { background: #6c5ce7; }
 
         /* IMAGE */
-        .img-box { height: 110px; display: flex; align-items: center; justify-content: center; margin-top: 15px; }
-        .img-box img { width: 85px; height: 85px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(255,255,255,0.3)); transition: 0.3s; }
-        .card:hover .img-box img { transform: scale(1.1); }
+        .img-box { height: 80px; display: flex; align-items: center; justify-content: center; margin-top: 25px; margin-bottom: 10px; }
+        .img-box img { width: 70px; height: 70px; object-fit: contain; filter: drop-shadow(0 0 10px rgba(255,255,255,0.1)); }
 
-        /* INFO */
-        .info { text-align: center; padding: 0 15px; }
-        .title { font-size: 1.3rem; font-weight: bold; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .type { font-size: 0.8rem; color: #aaa; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
-
-        /* SPECIAL TEXT */
-        .special-text { background: linear-gradient(to right, #ffd700, #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
-
-        /* TOGGLE BUTTONS */
-        .toggle-container { display: flex; justify-content: center; background: #15152a; border-radius: 20px; padding: 3px; margin: 0 auto 10px auto; width: fit-content; border: 1px solid #444; min-height: 32px; }
-        .toggle-btn { padding: 5px 12px; border-radius: 15px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: bold; background: transparent; color: #777; transition: 0.3s; }
-        .toggle-btn.active { background: #a29bfe; color: #fff; box-shadow: 0 0 10px rgba(162, 155, 254, 0.3); }
-
-        /* STATS */
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 10px; margin-top: 5px; }
-        .stat-item { text-align: center; }
-        .label { font-size: 0.65rem; color: #888; display: block; text-transform: uppercase; }
-        .val { font-size: 0.95rem; font-weight: bold; }
-        .val-money { color: #2ed573; } 
-        .val-trade { color: #ffd700; }
-        .val-robux { color: #a29bfe; }
-        .val-na { color: #777; font-style: italic; }
+        /* TITLE */
+        .title { font-size: 1.1rem; font-weight: bold; margin-bottom: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: white; }
         
-        .trend { font-size: 0.75rem; margin-top: 5px; font-weight: bold; }
+        /* TOGGLE BUTTONS */
+        .toggle-container { display: flex; background: #111; border-radius: 5px; padding: 2px; margin-bottom: 15px; }
+        .toggle-btn { flex: 1; padding: 5px; border: none; cursor: pointer; font-size: 0.7rem; font-weight: bold; background: transparent; color: #777; border-radius: 4px; }
+        .toggle-btn.active { background: #a29bfe; color: #fff; }
+
+        /* STATS LIST */
+        .stats-list { display: flex; flex-direction: column; gap: 8px; }
+        .stat-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; }
+        .label { color: #777; font-weight: bold; font-size: 0.8rem; }
+        .val { font-weight: bold; color: white; }
+        
+        .val-value { font-size: 1.1rem; color: #e1b12c; }
+        .val-robux { color: #a29bfe; }
+        
         .trend-Overpaid { color: #2ed573; }
-        .trend-Underpaid { color: #ff4757; }
         .trend-Stable { color: #fff; }
+        .trend-Underpaid { color: #ff4757; }
         .trend-Unstable { color: #ffa502; }
         .trend-SOON { color: #a29bfe; }
+        
+        .demand-10 { color: #2ed573; }
+        .demand-mid { color: #ffa502; }
+        .demand-low { color: #ff4757; }
+        
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">Blox<span>Values</span></div>
-        <p style="color: #aaa; font-size: 0.9rem;">Official Market Values</p>
+        <a href="calculator.html" style="
+            display: inline-block; margin-top: 10px; background: #2ed573; color: #000; 
+            padding: 8px 20px; text-decoration: none; border-radius: 20px; font-weight: bold;">
+            Open Calculator
+        </a>
     </header>
 
     <div class="controls">
-        <input type="text" id="search" class="search-box" placeholder="🔍 Search (e.g. West Dragon, Dark Blade)...">
+        <input type="text" id="search" class="search-box" placeholder="🔍 Search (e.g. West Dragon)...">
         
         <div class="filter-container">
             <button class="filter-btn active" onclick="filterData('all')">All</button>
-            <button class="filter-btn special-btn" onclick="filterData('Limited')">🔥 Limited</button>
-            <button class="filter-btn" onclick="filterData('Gamepass')">🎫 Gamepass</button>
             <button class="filter-btn" onclick="filterData('Mythical')">Mythical</button>
             <button class="filter-btn" onclick="filterData('Legendary')">Legendary</button>
             <button class="filter-btn" onclick="filterData('Rare')">Rare</button>
+            <button class="filter-btn" onclick="filterData('Uncommon')">Uncommon</button>
+            <button class="filter-btn" onclick="filterData('Common')">Common</button>
+            <button class="filter-btn special-btn" onclick="filterData('Limited')">Limited</button>
+            <button class="filter-btn" onclick="filterData('Gamepass')">Gamepass</button>
         </div>
     </div>
 
@@ -111,64 +111,64 @@
     <script>
         const defaultImg = "https://i.ibb.co.com/G690n9m/Logo.png"; 
 
-        // --- DATA ENTRY ---
+        // --- DATA ENTRY (Merged Physical & Perm) ---
         const data = [
             // --- MYTHICAL ---
-            { name: "West Dragon", rarity: "Mythical", val: "3.33B", demand: "10/10", trend: "Overpaid", price: "15M", type: "Beast", category: "fruit" },
-            { name: "East Dragon", rarity: "Mythical", val: "2.91B", demand: "10/10", trend: "Overpaid", price: "15M", type: "Beast", category: "fruit" },
-            { name: "Kitsune", rarity: "Mythical", val: "420M", demand: "10/10", trend: "Overpaid", price: "8M", type: "Beast", category: "fruit" },
-            { name: "Tiger", rarity: "Mythical", val: "160M", demand: "9/10", trend: "Stable", price: "5M", type: "Beast", category: "fruit" },
-            { name: "Yeti", rarity: "Mythical", val: "150M", demand: "10/10", trend: "Stable", price: "5M", type: "Beast", category: "fruit" },
-            { name: "Control", rarity: "Mythical", val: "140M", demand: "7/10", trend: "Unstable", price: "9M", type: "Natural", category: "fruit" },
-            { name: "Gas", rarity: "Mythical", val: "60M", demand: "8/10", trend: "Stable", price: "3.2M", type: "Logia", category: "fruit" },
-            { name: "Dough", rarity: "Mythical", val: "30M", demand: "10/10", trend: "Stable", price: "2.8M", type: "Logia", category: "fruit" },
-            { name: "T-Rex", rarity: "Mythical", val: "20M", demand: "8/10", trend: "Stable", price: "2.7M", type: "Beast", category: "fruit" },
-            { name: "Venom", rarity: "Mythical", val: "20M", demand: "10/10", trend: "SOON", price: "3M", type: "Natural", category: "fruit" },
-            { name: "Spirit", rarity: "Mythical", val: "10M", demand: "6/10", trend: "Stable", price: "3.4M", type: "Natural", category: "fruit" },
-            { name: "Mammoth", rarity: "Mythical", val: "10M", demand: "5/10", trend: "Stable", price: "2.7M", type: "Beast", category: "fruit" },
-            { name: "Gravity", rarity: "Mythical", val: "10M", demand: "4/10", trend: "Stable", price: "2.5M", type: "Natural", category: "fruit" },
-            { name: "Shadow", rarity: "Mythical", val: "6.5M", demand: "5/10", trend: "Stable", price: "2.9M", type: "Natural", category: "fruit" },
+            { name: "West Dragon", rarity: "Mythical", val: "3.33B", permVal: "6.65B", permPrice: "5K", demand: "10/10", trend: "Overpaid", price: "15M", type: "Beast", category: "fruit" },
+            { name: "East Dragon", rarity: "Mythical", val: "2.91B", permVal: "6.65B", permPrice: "5K", demand: "10/10", trend: "Overpaid", price: "15M", type: "Beast", category: "fruit" },
+            { name: "Kitsune", rarity: "Mythical", val: "420M", permVal: "5.81B", permPrice: "4K", demand: "10/10", trend: "Overpaid", price: "8M", type: "Beast", category: "fruit" },
+            { name: "Control", rarity: "Mythical", val: "140M", permVal: "5.81B", permPrice: "4K", demand: "7/10", trend: "Unstable", price: "9M", type: "Natural", category: "fruit" },
+            { name: "Yeti", rarity: "Mythical", val: "150M", permVal: "4.36B", permPrice: "3K", demand: "10/10", trend: "Stable", price: "5M", type: "Beast", category: "fruit" },
+            { name: "Tiger", rarity: "Mythical", val: "160M", permVal: "4.36B", permPrice: "3K", demand: "9/10", trend: "Stable", price: "5M", type: "Beast", category: "fruit" },
+            { name: "Gas", rarity: "Mythical", val: "60M", permVal: "3.32B", permPrice: "2.5K", demand: "8/10", trend: "Stable", price: "3.2M", type: "Logia", category: "fruit" },
+            { name: "Spirit", rarity: "Mythical", val: "10M", permVal: "3.32B", permPrice: "2.55K", demand: "6/10", trend: "Stable", price: "3.4M", type: "Natural", category: "fruit" },
+            { name: "Dough", rarity: "Mythical", val: "30M", permVal: "2.9B", permPrice: "2.4K", demand: "10/10", trend: "Stable", price: "2.8M", type: "Logia", category: "fruit" },
+            { name: "T-Rex", rarity: "Mythical", val: "20M", permVal: "2.9B", permPrice: "2.35K", demand: "8/10", trend: "Stable", price: "2.7M", type: "Beast", category: "fruit" },
+            { name: "Mammoth", rarity: "Mythical", val: "10M", permVal: "2.9B", permPrice: "2.35K", demand: "5/10", trend: "Stable", price: "2.7M", type: "Beast", category: "fruit" },
+            { name: "Venom", rarity: "Mythical", val: "20M", permVal: "2.9B", permPrice: "2.45K", demand: "10/10", trend: "SOON", price: "3M", type: "Natural", category: "fruit" },
+            { name: "Shadow", rarity: "Mythical", val: "6.5M", permVal: "2.9B", permPrice: "2.42K", demand: "5/10", trend: "Stable", price: "2.9M", type: "Natural", category: "fruit" },
+            { name: "Gravity", rarity: "Mythical", val: "10M", permVal: "2.75B", permPrice: "2.3K", demand: "4/10", trend: "Stable", price: "2.5M", type: "Natural", category: "fruit" },
 
             // --- LEGENDARY ---
-            { name: "Lightning", rarity: "Legendary", val: "80M", demand: "8/10", trend: "Stable", price: "2.1M", type: "Logia", category: "fruit" },
-            { name: "Portal", rarity: "Legendary", val: "10M", demand: "10/10", trend: "Overpaid", price: "1.9M", type: "Natural", category: "fruit" },
-            { name: "Buddha", rarity: "Legendary", val: "10M", demand: "10/10", trend: "Overpaid", price: "1.2M", type: "Beast", category: "fruit" },
-            { name: "Pain", rarity: "Legendary", val: "10M", demand: "5/10", trend: "Stable", price: "2.3M", type: "Natural", category: "fruit" },
-            { name: "Blizzard", rarity: "Legendary", val: "5M", demand: "5/10", trend: "Stable", price: "2.4M", type: "Logia", category: "fruit" },
-            { name: "Creation", rarity: "Legendary", val: "3.5M", demand: "3/10", trend: "Stable", price: "1.4M", type: "Natural", category: "fruit" },
-            { name: "Phoenix", rarity: "Legendary", val: "2.75M", demand: "3/10", trend: "Stable", price: "1.8M", type: "Beast", category: "fruit" },
-            { name: "Sound", rarity: "Legendary", val: "2.5M", demand: "4/10", trend: "Stable", price: "1.7M", type: "Natural", category: "fruit" },
-            { name: "Spider", rarity: "Legendary", val: "1.5M", demand: "2/10", trend: "Stable", price: "1.5M", type: "Natural", category: "fruit" },
-            { name: "Love", rarity: "Legendary", val: "1.5M", demand: "3/10", trend: "Stable", price: "1.3M", type: "Natural", category: "fruit" },
-            { name: "Quake", rarity: "Legendary", val: "1M", demand: "2/10", trend: "Stable", price: "1M", type: "Natural", category: "fruit" },
+            { name: "Pain", rarity: "Legendary", val: "10M", permVal: "2.48B", permPrice: "2.2K", demand: "5/10", trend: "Stable", price: "2.3M", type: "Natural", category: "fruit" },
+            { name: "Lightning", rarity: "Legendary", val: "80M", permVal: "2.33B", permPrice: "2.1K", demand: "8/10", trend: "Stable", price: "2.1M", type: "Logia", category: "fruit" },
+            { name: "Blizzard", rarity: "Legendary", val: "5M", permVal: "2.29B", permPrice: "2.25K", demand: "5/10", trend: "Stable", price: "2.4M", type: "Logia", category: "fruit" },
+            { name: "Portal", rarity: "Legendary", val: "10M", permVal: "1.76B", permPrice: "2K", demand: "10/10", trend: "Overpaid", price: "1.9M", type: "Natural", category: "fruit" },
+            { name: "Phoenix", rarity: "Legendary", val: "2.75M", permVal: "1.76B", permPrice: "2K", demand: "3/10", trend: "Stable", price: "1.8M", type: "Beast", category: "fruit" },
+            { name: "Sound", rarity: "Legendary", val: "2.5M", permVal: "1.61B", permPrice: "1.9K", demand: "4/10", trend: "Stable", price: "1.7M", type: "Natural", category: "fruit" },
+            { name: "Spider", rarity: "Legendary", val: "1.5M", permVal: "1.46B", permPrice: "1.8K", demand: "2/10", trend: "Stable", price: "1.5M", type: "Natural", category: "fruit" },
+            { name: "Creation", rarity: "Legendary", val: "3.5M", permVal: "1.39B", permPrice: "1.75K", demand: "3/10", trend: "Stable", price: "1.4M", type: "Natural", category: "fruit" },
+            { name: "Buddha", rarity: "Legendary", val: "10M", permVal: "1.32B", permPrice: "1.65K", demand: "10/10", trend: "Overpaid", price: "1.2M", type: "Beast", category: "fruit" },
+            { name: "Love", rarity: "Legendary", val: "1.5M", permVal: "1.32B", permPrice: "1.7K", demand: "3/10", trend: "Stable", price: "1.3M", type: "Natural", category: "fruit" },
+            { name: "Quake", rarity: "Legendary", val: "1M", permVal: "1.1B", permPrice: "1.5K", demand: "2/10", trend: "Stable", price: "1M", type: "Natural", category: "fruit" },
 
             // --- RARE ---
-            { name: "Magma", rarity: "Rare", val: "1.15M", demand: "8/10", trend: "Overpaid", price: "960K", type: "Logia", category: "fruit" },
-            { name: "Light", rarity: "Rare", val: "800K", demand: "2/10", trend: "Stable", price: "650K", type: "Logia", category: "fruit" },
-            { name: "Ghost", rarity: "Rare", val: "800K", demand: "1/10", trend: "Underpaid", price: "940K", type: "Natural", category: "fruit" },
-            { name: "Rubber", rarity: "Rare", val: "700K", demand: "1/10", trend: "Stable", price: "750K", type: "Natural", category: "fruit" },
+            { name: "Magma", rarity: "Rare", val: "1.15M", permVal: "1.04B", permPrice: "1.3K", demand: "8/10", trend: "Overpaid", price: "960K", type: "Logia", category: "fruit" },
+            { name: "Ghost", rarity: "Rare", val: "800K", permVal: "720M", permPrice: "1.27K", demand: "1/10", trend: "Underpaid", price: "940K", type: "Natural", category: "fruit" },
+            { name: "Rubber", rarity: "Rare", val: "700K", permVal: "690M", permPrice: "1.2K", demand: "1/10", trend: "Stable", price: "750K", type: "Natural", category: "fruit" },
+            { name: "Light", rarity: "Rare", val: "800K", permVal: "690M", permPrice: "1.1K", demand: "2/10", trend: "Stable", price: "650K", type: "Logia", category: "fruit" },
 
             // --- UNCOMMON ---
-            { name: "Diamond", rarity: "Uncommon", val: "1M", demand: "2/10", trend: "Stable", price: "600K", type: "Natural", category: "fruit" },
-            { name: "Eagle", rarity: "Uncommon", val: "800K", demand: "2/10", trend: "Stable", price: "550K", type: "Beast", category: "fruit" },
-            { name: "Ice", rarity: "Uncommon", val: "550K", demand: "2/10", trend: "Stable", price: "350K", type: "Logia", category: "fruit" },
-            { name: "Sand", rarity: "Uncommon", val: "420K", demand: "1/10", trend: "Stable", price: "420K", type: "Logia", category: "fruit" },
-            { name: "Dark", rarity: "Uncommon", val: "400K", demand: "1/10", trend: "Stable", price: "500K", type: "Logia", category: "fruit" },
-            { name: "Flame", rarity: "Uncommon", val: "250K", demand: "1/10", trend: "Stable", price: "250K", type: "Logia", category: "fruit" },
+            { name: "Diamond", rarity: "Uncommon", val: "1M", permVal: "630M", permPrice: "1K", demand: "2/10", trend: "Stable", price: "600K", type: "Natural", category: "fruit" },
+            { name: "Eagle", rarity: "Uncommon", val: "800K", permVal: "570M", permPrice: "975", demand: "2/10", trend: "Stable", price: "550K", type: "Beast", category: "fruit" },
+            { name: "Dark", rarity: "Uncommon", val: "400K", permVal: "570M", permPrice: "950", demand: "1/10", trend: "Stable", price: "500K", type: "Logia", category: "fruit" },
+            { name: "Sand", rarity: "Uncommon", val: "420K", permVal: "480M", permPrice: "850", demand: "1/10", trend: "Stable", price: "420K", type: "Logia", category: "fruit" },
+            { name: "Ice", rarity: "Uncommon", val: "550K", permVal: "440M", permPrice: "750", demand: "2/10", trend: "Stable", price: "350K", type: "Logia", category: "fruit" },
+            { name: "Flame", rarity: "Uncommon", val: "250K", permVal: "270M", permPrice: "550", demand: "1/10", trend: "Stable", price: "250K", type: "Logia", category: "fruit" },
 
             // --- COMMON ---
-            { name: "Spike", rarity: "Common", val: "180K", demand: "1/10", trend: "Stable", price: "180K", type: "Natural", category: "fruit" },
-            { name: "Smoke", rarity: "Common", val: "100K", demand: "1/10", trend: "Stable", price: "100K", type: "Logia", category: "fruit" },
-            { name: "Bomb", rarity: "Common", val: "80K", demand: "1/10", trend: "Stable", price: "80K", type: "Natural", category: "fruit" },
-            { name: "Spring", rarity: "Common", val: "60K", demand: "1/10", trend: "Stable", price: "60K", type: "Natural", category: "fruit" },
-            { name: "Blade", rarity: "Common", val: "50K", demand: "1/10", trend: "Stable", price: "30K", type: "Natural", category: "fruit" },
-            { name: "Spin", rarity: "Common", val: "7.5K", demand: "1/10", trend: "Stable", price: "7.5K", type: "Natural", category: "fruit" },
-            { name: "Rocket", rarity: "Common", val: "5K", demand: "1/10", trend: "Stable", price: "5K", type: "Natural", category: "fruit" },
+            { name: "Spike", rarity: "Common", val: "180K", permVal: "95M", permPrice: "380", demand: "1/10", trend: "Stable", price: "180K", type: "Natural", category: "fruit" },
+            { name: "Smoke", rarity: "Common", val: "100K", permVal: "63M", permPrice: "250", demand: "1/10", trend: "Stable", price: "100K", type: "Logia", category: "fruit" },
+            { name: "Bomb", rarity: "Common", val: "80K", permVal: "55M", permPrice: "220", demand: "1/10", trend: "Stable", price: "80K", type: "Natural", category: "fruit" },
+            { name: "Spring", rarity: "Common", val: "60K", permVal: "45M", permPrice: "180", demand: "1/10", trend: "Stable", price: "60K", type: "Natural", category: "fruit" },
+            { name: "Blade", rarity: "Common", val: "50K", permVal: "20M", permPrice: "100", demand: "1/10", trend: "Stable", price: "30K", type: "Natural", category: "fruit" },
+            { name: "Spin", rarity: "Common", val: "15M", permVal: "15M", permPrice: "75", demand: "1/10", trend: "Stable", price: "7.5K", type: "Natural", category: "fruit" },
+            { name: "Rocket", rarity: "Common", val: "10M", permVal: "10M", permPrice: "50", demand: "1/10", trend: "Stable", price: "5K", type: "Natural", category: "fruit" },
 
-            // --- LIMITED (NO BUTTONS) ---
+            // --- LIMITED & GAMEPASS (No Buttons) ---
             { name: "Galaxy Empyrean Kitsune", rarity: "Limited", val: "4.56B", demand: "10/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited" },
             { name: "Ember West Dragon", rarity: "Limited", val: "3.75B", demand: "10/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited" },
-            { name: "Permanent Dragon Token", rarity: "Limited", val: "3.33B", demand: "6/10", trend: "Overpaid", price: "N/A", type: "Token", category: "limited" },
+            { name: "Perm Dragon Token", rarity: "Limited", val: "3.33B", demand: "6/10", trend: "Overpaid", price: "N/A", type: "Token", category: "limited" },
             { name: "Crimson Kitsune", rarity: "Limited", val: "3.07B", demand: "10/10", trend: "Overpaid", price: "2K", type: "Special", category: "limited" },
             { name: "Purple Lightning", rarity: "Limited", val: "2.46B", demand: "10/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited" },
             { name: "Yellow Lightning", rarity: "Limited", val: "760M", demand: "10/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited" },
@@ -198,14 +198,13 @@
             { name: "Orange Portal", rarity: "Limited", val: "N/A", demand: "SOON", trend: "Stable", price: "N/A", type: "Special", category: "limited" },
             { name: "Parrot", rarity: "Limited", val: "N/A", demand: "1/10", trend: "Stable", price: "499", type: "Pet", category: "limited" },
 
-            // --- GAMEPASS (NO BUTTONS) ---
             { name: "Fruit Notifier", rarity: "Gamepass", val: "3.99B", demand: "9/10", trend: "Stable", price: "2.7K", type: "GP", category: "gamepass" },
             { name: "Dark Blade", rarity: "Gamepass", val: "840M", demand: "9/10", trend: "Stable", price: "1.2K", type: "GP", category: "gamepass" },
             { name: "Mythical Scrolls", rarity: "Gamepass", val: "700M", demand: "4/10", trend: "Stable", price: "1.5K", type: "GP", category: "gamepass" },
             { name: "Legendary Scrolls", rarity: "Gamepass", val: "415M", demand: "3/10", trend: "Stable", price: "800", type: "GP", category: "gamepass" },
+            { name: "+1 Fruit Storage", rarity: "Gamepass", val: "255M", demand: "10/10", trend: "Overpaid", price: "400", type: "GP", category: "gamepass" },
             { name: "2x Mastery", rarity: "Gamepass", val: "280M", demand: "10/10", trend: "Overpaid", price: "450", type: "GP", category: "gamepass" },
             { name: "2x Money", rarity: "Gamepass", val: "280M", demand: "10/10", trend: "Overpaid", price: "450", type: "GP", category: "gamepass" },
-            { name: "+1 Fruit Storage", rarity: "Gamepass", val: "255M", demand: "10/10", trend: "Overpaid", price: "400", type: "GP", category: "gamepass" },
             { name: "2x Boss Drops", rarity: "Gamepass", val: "170M", demand: "6/10", trend: "Overpaid", price: "350", type: "GP", category: "gamepass" },
             { name: "Fast Boats", rarity: "Gamepass", val: "170M", demand: "9/10", trend: "Overpaid", price: "350", type: "GP", category: "gamepass" }
         ];
@@ -219,30 +218,17 @@
             dataset.forEach((item, index) => {
                 const cardId = `item-${index}`;
                 const isSpecial = (item.category === 'limited' || item.category === 'gamepass');
-                
-                // Color Class
                 const bgClass = `bg-${item.rarity}`;
-                // Demand Color
-                let demClass = "demand-low";
-                if(item.demand.includes('10') || item.demand.includes('9') || item.demand.includes('8')) demClass = "demand-10";
-                else if(item.demand.includes('7') || item.demand.includes('6') || item.demand.includes('5')) demClass = "demand-mid";
                 
-                // Title Style
-                const titleClass = (item.category === 'limited') ? "special-text" : "";
-
-                // Price Display Logic
+                // Colors
+                let demClass = item.demand.includes('10') ? "demand-10" : (item.demand.includes('1') ? "demand-low" : "demand-mid");
+                
                 let displayPrice = item.price;
-                let priceColor = "val-money";
-                
-                if (item.category === 'gamepass' || (item.category === 'limited' && !item.price.includes('N/A'))) {
-                     displayPrice = "R$ " + item.price;
-                     priceColor = "val-robux";
-                } else if (item.category === 'fruit') {
-                    displayPrice = "$" + item.price;
-                }
+                if(item.category === 'fruit') displayPrice = "$" + item.price;
+                if(item.category === 'gamepass' || item.category === 'limited') displayPrice = "R$ " + item.price;
 
-                // --- BUTTON HTML (Only for Fruits) ---
-                let toggleHtml = `<div style="height: 32px; margin-bottom:10px;"></div>`;
+                // Button HTML
+                let toggleHtml = `<div style="height: 25px; margin-bottom:15px;"></div>`;
                 if(!isSpecial) {
                     toggleHtml = `
                     <div class="toggle-container">
@@ -252,66 +238,67 @@
                 }
 
                 const html = `
-                <div class="card ${bgClass}" id="${cardId}" 
-                     data-reg-val="${item.val}" data-reg-price="${displayPrice}"
-                     data-perm-val="N/A" data-perm-price="N/A"
-                     data-cat="${item.category}">
+                <div class="card" id="${cardId}" 
+                     data-reg-val="${item.val}" data-reg-price="${displayPrice}" 
+                     data-perm-val="${item.permVal || 'N/A'}" data-perm-price="${item.permPrice ? item.permPrice + ' R$' : 'N/A'}">
                      
-                    <span class="rarity-badge">${item.rarity}</span>
-                    <span class="demand-badge ${demClass}">${item.demand}</span>
+                    <div class="rarity-tag ${bgClass}">${item.rarity}</div>
                     
                     <div class="img-box">
                         <img src="${defaultImg}" alt="${item.name}">
                     </div>
 
                     <div class="info">
-                        <div class="title ${titleClass}">${item.name}</div>
-                        
+                        <div class="title">${item.name}</div>
                         ${toggleHtml}
 
-                        <div class="stats-grid">
-                            <div class="stat-item">
-                                <span class="label">PRICE</span>
-                                <span class="val ${priceColor}" id="${cardId}-price">${displayPrice}</span>
+                        <div class="stats-list">
+                            <div class="stat-row">
+                                <span class="label">Value</span>
+                                <span class="val val-value" id="${cardId}-val">${item.val}</span>
                             </div>
-                            <div class="stat-item" style="border-left: 1px solid rgba(255,255,255,0.1);">
-                                <span class="label">VALUE</span>
-                                <span class="val val-trade" id="${cardId}-val">${item.val}</span>
+                            <div class="stat-row">
+                                <span class="label">Trend</span>
+                                <span class="val trend-${item.trend}">${item.trend}</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="label">Demand</span>
+                                <span class="val ${demClass}">${item.demand}</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="label">Price</span>
+                                <span class="val price-val" id="${cardId}-price">${displayPrice}</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="label">Type</span>
+                                <span class="val" style="color:#a29bfe">${item.type}</span>
                             </div>
                         </div>
-                        
-                        <div class="trend trend-${item.trend}">${item.trend}</div>
-                        <div class="type">${item.type}</div>
                     </div>
                 </div>`;
                 container.innerHTML += html;
             });
         }
 
-        // --- TOGGLE LOGIC ---
         window.toggleMode = function(cardId, mode, btn) {
             const card = document.getElementById(cardId);
             const priceEl = document.getElementById(`${cardId}-price`);
             const valEl = document.getElementById(`${cardId}-val`);
 
-            // Switch Active Button
             card.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
             if(mode === 'perm') {
-                priceEl.innerText = "N/A"; 
-                valEl.innerText = "N/A";
-                priceEl.className = "val val-na";
-                valEl.className = "val val-na";
+                priceEl.innerText = card.getAttribute('data-perm-price');
+                valEl.innerText = card.getAttribute('data-perm-val');
+                priceEl.className = "val val-robux";
             } else {
                 priceEl.innerText = card.getAttribute('data-reg-price');
                 valEl.innerText = card.getAttribute('data-reg-val');
-                priceEl.className = "val val-money";
-                valEl.className = "val val-trade";
+                priceEl.className = "val val-value";
             }
         }
 
-        // --- FILTER ---
         window.filterData = function(cat) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
@@ -328,13 +315,10 @@
         }
 
         searchInput.addEventListener('input', () => {
-            const activeBtn = document.querySelector('.filter-btn.active');
-            activeBtn.click();
+            document.querySelector('.filter-btn.active').click();
         });
 
-        // Initial Load
         render(data);
-
     </script>
 </body>
 </html>
