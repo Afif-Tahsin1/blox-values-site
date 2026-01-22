@@ -40,7 +40,7 @@
             padding: 3px; text-transform: uppercase; letter-spacing: 1px;
         }
         .bg-Mythical { background: #ff4757; }
-        .bg-Legendary { background: #e1b12c; color: black; } 
+        .bg-Legendary { background: #e1b12c; color: black; }
         .bg-Rare { background: #3742fa; }
         .bg-Uncommon { background: #2ed573; color: black; }
         .bg-Common { background: #747d8c; }
@@ -67,17 +67,14 @@
         
         .val-value { font-size: 1.1rem; color: #e1b12c; }
         .val-robux { color: #a29bfe; }
-        
         .trend-Overpaid { color: #2ed573; }
         .trend-Stable { color: #fff; }
         .trend-Underpaid { color: #ff4757; }
         .trend-Unstable { color: #ffa502; }
         .trend-SOON { color: #a29bfe; }
-        
         .demand-10 { color: #2ed573; }
         .demand-mid { color: #ffa502; }
         .demand-low { color: #ff4757; }
-        
         .price-val { color: #e1b12c; }
     </style>
 </head>
@@ -93,7 +90,7 @@
     </header>
 
     <div class="controls">
-        <input type="text" id="search" class="search-box" placeholder="🔍 Search (e.g. West Dragon)...">
+        <input type="text" id="search" class="search-box" placeholder="🔍 Search (e.g. Kitsune, Dark Blade)...">
         
         <div class="filter-container">
             <button class="filter-btn active" onclick="filterData('all')">All</button>
@@ -112,16 +109,16 @@
     <script>
         const defaultImg = "https://i.ibb.co.com/G690n9m/Logo.png"; 
 
-        // --- DATA ENTRY (Updated with Images) ---
+        // --- DATA ENTRY (ALL IMAGES UPDATED) ---
         const data = [
             // --- MYTHICAL ---
-            { name: "West Dragon", rarity: "Mythical", val: "6.65B", permVal: "6.65B", permPrice: "5K", demand: "10/10", trend: "Overpaid", price: "15M", type: "Beast", category: "fruit", img: "https://i.postimg.cc/X7Nhnj1B/image-removebg-preview-(41).png" },
-            { name: "East Dragon", rarity: "Mythical", val: "2.91B", permVal: "6.65B", permPrice: "5K", demand: "10/10", trend: "Overpaid", price: "15M", type: "Beast", category: "fruit", img: "https://i.postimg.cc/TY2STdNg/image-removebg-preview-(40).png" },
+            { name: "West Dragon", rarity: "Mythical", val: "1.45B", permVal: "6.65B", permPrice: "5K", demand: "10/10", trend: "Overpaid", price: "15M", type: "Beast", category: "fruit", img: "https://i.postimg.cc/X7Nhnj1B/image-removebg-preview-(41).png" },
+            { name: "East Dragon", rarity: "Mythical", val: "1.16B", permVal: "6.65B", permPrice: "5K", demand: "10/10", trend: "Overpaid", price: "15M", type: "Beast", category: "fruit", img: "https://i.postimg.cc/TY2STdNg/image-removebg-preview-(40).png" },
             { name: "Kitsune", rarity: "Mythical", val: "420M", permVal: "5.81B", permPrice: "4K", demand: "10/10", trend: "Overpaid", price: "8M", type: "Beast", category: "fruit", img: "https://i.postimg.cc/ncV5nFS4/image-removebg-preview-(37).png" },
             { name: "Tiger", rarity: "Mythical", val: "160M", permVal: "4.36B", permPrice: "3K", demand: "9/10", trend: "Stable", price: "5M", type: "Beast", category: "fruit", img: "https://i.postimg.cc/NfGVQsCJ/image-removebg-preview-(28).png" },
             { name: "Yeti", rarity: "Mythical", val: "150M", permVal: "4.36B", permPrice: "3K", demand: "10/10", trend: "Stable", price: "5M", type: "Beast", category: "fruit", img: "https://i.postimg.cc/BQZyJS7x/image-removebg-preview-(38).png" },
             { name: "Control", rarity: "Mythical", val: "140M", permVal: "5.81B", permPrice: "4K", demand: "7/10", trend: "Unstable", price: "9M", type: "Natural", category: "fruit", img: "https://i.postimg.cc/zXDMqz22/image-removebg-preview-(27).png" },
-            { name: "Gas", rarity: "Mythical", val: "60M", permVal: "3.32B", permPrice: "2.5K", demand: "8/10", trend: "Stable", price: "3.2M", type: "Logia", category: "fruit", img: defaultImg }, // No Image provided for Gas
+            { name: "Gas", rarity: "Mythical", val: "60M", permVal: "3.32B", permPrice: "2.5K", demand: "8/10", trend: "Stable", price: "3.2M", type: "Logia", category: "fruit", img: "https://i.postimg.cc/SRV1jfLq/download-removebg-preview-(39).png" },
             { name: "Spirit", rarity: "Mythical", val: "10M", permVal: "3.32B", permPrice: "2.55K", demand: "6/10", trend: "Stable", price: "3.4M", type: "Natural", category: "fruit", img: "https://i.postimg.cc/9FXScmgP/image-removebg-preview-(36).png" },
             { name: "Dough", rarity: "Mythical", val: "30M", permVal: "2.9B", permPrice: "2.4K", demand: "10/10", trend: "Stable", price: "2.8M", type: "Logia", category: "fruit", img: "https://i.postimg.cc/WbpKsNY8/image-removebg-preview-(32).png" },
             { name: "T-Rex", rarity: "Mythical", val: "20M", permVal: "2.9B", permPrice: "2.35K", demand: "8/10", trend: "Stable", price: "2.7M", type: "Beast", category: "fruit", img: "https://i.postimg.cc/4N4MXf2w/image-removebg-preview-(31).png" },
@@ -147,7 +144,7 @@
             { name: "Magma", rarity: "Rare", val: "1.15M", permVal: "1.04B", permPrice: "1.3K", demand: "8/10", trend: "Overpaid", price: "960K", type: "Logia", category: "fruit", img: "https://i.postimg.cc/bN65J744/image-removebg-preview-(15).png" },
             { name: "Ghost", rarity: "Rare", val: "800K", permVal: "720M", permPrice: "1.27K", demand: "1/10", trend: "Underpaid", price: "940K", type: "Natural", category: "fruit", img: "https://i.postimg.cc/kXjH40Lz/image-removebg-preview-(16).png" },
             { name: "Rubber", rarity: "Rare", val: "700K", permVal: "690M", permPrice: "1.2K", demand: "1/10", trend: "Stable", price: "750K", type: "Natural", category: "fruit", img: "https://i.postimg.cc/Pr67xg0B/image-removebg-preview-(13).png" },
-            { name: "Light", rarity: "Rare", val: "800K", permVal: "690M", permPrice: "1.1K", demand: "2/10", trend: "Stable", price: "650K", type: "Logia", category: "fruit", img: defaultImg }, // Light Image Not Provided
+            { name: "Light", rarity: "Rare", val: "800K", permVal: "690M", permPrice: "1.1K", demand: "2/10", trend: "Stable", price: "650K", type: "Logia", category: "fruit", img: "https://i.postimg.cc/Y2zZcGRx/download-removebg-preview.png" },
 
             // --- UNCOMMON ---
             { name: "Diamond", rarity: "Uncommon", val: "1M", permVal: "630M", permPrice: "1K", demand: "2/10", trend: "Stable", price: "600K", type: "Natural", category: "fruit", img: "https://i.postimg.cc/SNQ5mS1z/download-removebg-preview-(1).png" },
@@ -167,52 +164,74 @@
             { name: "Rocket", rarity: "Common", val: "10M", permVal: "10M", permPrice: "50", demand: "1/10", trend: "Stable", price: "5K", type: "Natural", category: "fruit", img: "https://i.postimg.cc/bN65J7KX/image-removebg-preview-(12).png" },
 
             // --- LIMITED & GAMEPASS (No Buttons) ---
-            { name: "Perm Dragon Token", rarity: "Limited", val: "3.33B", demand: "6/10", trend: "Overpaid", price: "N/A", type: "Token", category: "limited", img: defaultImg },
-            { name: "Galaxy Empyrean Kitsune", rarity: "Limited", val: "4.56B", demand: "10/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Ember West Dragon", rarity: "Limited", val: "3.75B", demand: "10/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Crimson Kitsune", rarity: "Limited", val: "3.07B", demand: "10/10", trend: "Overpaid", price: "2K", type: "Special", category: "limited", img: defaultImg },
-            { name: "Divine Portal", rarity: "Limited", val: "340M", demand: "8/10", trend: "SOON", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Purple Lightning", rarity: "Limited", val: "2.46B", demand: "10/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Red Lightning", rarity: "Limited", val: "600M", demand: "10/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Yellow Lightning", rarity: "Limited", val: "760M", demand: "10/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Green Lightning", rarity: "Limited", val: "140M", demand: "3/10", trend: "Unstable", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Werewolf", rarity: "Limited", val: "345M", demand: "8/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Rose Quartz Diamond", rarity: "Limited", val: "60M", demand: "5/10", trend: "Stable", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Emerald Diamond", rarity: "Limited", val: "50M", demand: "4/10", trend: "Stable", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Topaz Diamond", rarity: "Limited", val: "50M", demand: "4/10", trend: "Stable", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Ruby Diamond", rarity: "Limited", val: "30M", demand: "4/10", trend: "Stable", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Dragon Token", rarity: "Limited", val: "N/A", demand: "4/10", trend: "Overpaid", price: "N/A", type: "Token", category: "limited", img: defaultImg },
-            { name: "Eclipse", rarity: "Limited", val: "N/A", demand: "10/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Super Spirit Pain", rarity: "Limited", val: "570M", demand: "10/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: defaultImg },
+            { name: "Perm Dragon Token", rarity: "Limited", val: "3.33B", demand: "6/10", trend: "Overpaid", price: "N/A", type: "Token", category: "limited", img: "https://i.postimg.cc/pXzLDBJd/download-removebg-preview-(37).png" },
+            { name: "Galaxy Empyrean Kitsune", rarity: "Limited", val: "4.56B", demand: "10/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/cLW4T8F3/download-removebg-preview-(14).png" },
+            { name: "Ember West Dragon", rarity: "Limited", val: "3.75B", demand: "10/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/x1QTgb6v/download-removebg-preview-(13).png" },
+            { name: "Crimson Kitsune", rarity: "Limited", val: "3.07B", demand: "10/10", trend: "Overpaid", price: "2K", type: "Special", category: "limited", img: "https://i.postimg.cc/Cx0LJfcC/download-removebg-preview-(11).png" },
+            { name: "Divine Portal", rarity: "Limited", val: "340M", demand: "8/10", trend: "SOON", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/VkwL4bKg/download-removebg-preview-(7).png" },
+            { name: "Purple Lightning", rarity: "Limited", val: "2.46B", demand: "10/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/dtrV89j8/download-removebg-preview-(23).png" },
+            { name: "Red Lightning", rarity: "Limited", val: "600M", demand: "10/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/vZyHX60W/download-removebg-preview-(10).png" },
+            { name: "Yellow Lightning", rarity: "Limited", val: "760M", demand: "10/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/PrY5mMQZ/download-removebg-preview-(24).png" },
+            { name: "Green Lightning", rarity: "Limited", val: "140M", demand: "3/10", trend: "Unstable", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/8PMzhbmL/download-removebg-preview-(25).png" },
+            { name: "Werewolf", rarity: "Limited", val: "345M", demand: "8/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/Sx4NVzgr/download-removebg-preview-(8).png" },
+            { name: "Rose Quartz Diamond", rarity: "Limited", val: "60M", demand: "5/10", trend: "Stable", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/rFxwS9ND/download-removebg-preview-(31).png" },
+            { name: "Emerald Diamond", rarity: "Limited", val: "50M", demand: "4/10", trend: "Stable", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/J4ZzbQ5G/download-removebg-preview-(33).png" },
+            { name: "Topaz Diamond", rarity: "Limited", val: "50M", demand: "4/10", trend: "Stable", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/SNCxWGfj/download-removebg-preview-(32).png" },
+            { name: "Ruby Diamond", rarity: "Limited", val: "30M", demand: "4/10", trend: "Stable", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/qMyv8Gxq/download-removebg-preview-(34).png" },
+            { name: "Dragon Token", rarity: "Limited", val: "N/A", demand: "4/10", trend: "Overpaid", price: "N/A", type: "Token", category: "limited", img: "https://i.postimg.cc/pXzLDBJd/download-removebg-preview-(37).png" },
+            { name: "Eclipse", rarity: "Limited", val: "N/A", demand: "10/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/3JmxgZFr/download-removebg-preview-(38).png" },
+            { name: "Super Spirit Pain", rarity: "Limited", val: "570M", demand: "10/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/Dwhy5bxP/download-removebg-preview-(9).png" },
             { name: "Torment Pain", rarity: "Limited", val: "60M", demand: "3/10", trend: "Unstable", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Sadness Pain", rarity: "Limited", val: "290M", demand: "7/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Frustration Pain", rarity: "Limited", val: "200M", demand: "6/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Celestial Pain", rarity: "Limited", val: "270M", demand: "7/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Eagle Requiem", rarity: "Limited", val: "90M", demand: "5/10", trend: "Stable", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Eagle Glacier", rarity: "Limited", val: "20M", demand: "3/10", trend: "Unstable", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Eagle Matrix", rarity: "Limited", val: "135M", demand: "5/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Celebration Bomb", rarity: "Limited", val: "5M", demand: "2/10", trend: "Stable", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Azura Bomb", rarity: "Limited", val: "160M", demand: "7/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Thermite Bomb", rarity: "Limited", val: "160M", demand: "7/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Nuclear Bomb", rarity: "Limited", val: "160M", demand: "7/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Pink Portal", rarity: "Limited", val: "N/A", demand: "SOON", trend: "Stable", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Orange Portal", rarity: "Limited", val: "N/A", demand: "SOON", trend: "Stable", price: "N/A", type: "Special", category: "limited", img: defaultImg },
-            { name: "Parrot", rarity: "Limited", val: "N/A", demand: "1/10", trend: "Stable", price: "499", type: "Pet", category: "limited", img: defaultImg },
+            { name: "Sadness Pain", rarity: "Limited", val: "290M", demand: "7/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/W1VbSJ57/download-removebg-preview-(6).png" },
+            { name: "Frustration Pain", rarity: "Limited", val: "200M", demand: "6/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/jdPSzh4W/download-removebg-preview-(30).png" },
+            { name: "Celestial Pain", rarity: "Limited", val: "270M", demand: "7/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/YC7q8md8/download-removebg-preview-(5).png" },
+            { name: "Eagle Requiem", rarity: "Limited", val: "90M", demand: "5/10", trend: "Stable", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/pLvXknsq/download-removebg-preview-(4).png" },
+            { name: "Eagle Glacier", rarity: "Limited", val: "20M", demand: "3/10", trend: "Unstable", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/28hS4x78/download-removebg-preview-(35).png" },
+            { name: "Eagle Matrix", rarity: "Limited", val: "135M", demand: "5/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/Qx1dpqJT/download-removebg-preview-(26).png" },
+            { name: "Celebration Bomb", rarity: "Limited", val: "5M", demand: "2/10", trend: "Stable", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/Wbg1M7w1/download-removebg-preview-(36).png" },
+            { name: "Azura Bomb", rarity: "Limited", val: "160M", demand: "7/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/3JmxgZFG/download-removebg-preview-(28).png" },
+            { name: "Thermite Bomb", rarity: "Limited", val: "160M", demand: "7/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/yYc8FTyg/download-removebg-preview-(29).png" },
+            { name: "Nuclear Bomb", rarity: "Limited", val: "160M", demand: "7/10", trend: "Overpaid", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/zXKGnkFH/download-removebg-preview-(27).png" },
+            { name: "Pink Portal", rarity: "Limited", val: "N/A", demand: "SOON", trend: "Stable", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/C5VHYB96/image-removebg-preview-(44).png" },
+            { name: "Orange Portal", rarity: "Limited", val: "N/A", demand: "SOON", trend: "Stable", price: "N/A", type: "Special", category: "limited", img: "https://i.postimg.cc/C5VHYB96/image-removebg-preview-(44).png" },
+            { name: "Parrot", rarity: "Limited", val: "N/A", demand: "1/10", trend: "Stable", price: "499", type: "Pet", category: "limited", img: "https://i.postimg.cc/J0tYDBpm/download-removebg-preview-(40).png" },
 
-            { name: "Fruit Notifier", rarity: "Gamepass", val: "3.99B", demand: "9/10", trend: "Stable", price: "2.7K", type: "GP", category: "gamepass", img: defaultImg },
-            { name: "Dark Blade", rarity: "Gamepass", val: "840M", demand: "9/10", trend: "Stable", price: "1.2K", type: "GP", category: "gamepass", img: defaultImg },
-            { name: "Mythical Scrolls", rarity: "Gamepass", val: "700M", demand: "4/10", trend: "Stable", price: "1.5K", type: "GP", category: "gamepass", img: defaultImg },
-            { name: "Legendary Scrolls", rarity: "Gamepass", val: "415M", demand: "3/10", trend: "Stable", price: "800", type: "GP", category: "gamepass", img: defaultImg },
-            { name: "+1 Fruit Storage", rarity: "Gamepass", val: "255M", demand: "10/10", trend: "Overpaid", price: "400", type: "GP", category: "gamepass", img: defaultImg },
+            { name: "Fruit Notifier", rarity: "Gamepass", val: "3.99B", demand: "9/10", trend: "Stable", price: "2.7K", type: "GP", category: "gamepass", img: "https://i.postimg.cc/J4ZzbQ55/download-removebg-preview-(20).png" },
+            { name: "Dark Blade", rarity: "Gamepass", val: "840M", demand: "9/10", trend: "Stable", price: "1.2K", type: "GP", category: "gamepass", img: "https://i.postimg.cc/52JNpFsv/download-removebg-preview-(15).png" },
+            { name: "Mythical Scrolls", rarity: "Gamepass", val: "700M", demand: "4/10", trend: "Stable", price: "1.5K", type: "GP", category: "gamepass", img: "https://i.postimg.cc/RZmVGngn/download-removebg-preview-(16).png" },
+            { name: "Legendary Scrolls", rarity: "Gamepass", val: "415M", demand: "3/10", trend: "Stable", price: "800", type: "GP", category: "gamepass", img: "https://i.postimg.cc/PrY5mMQY/download-removebg-preview-(22).png" },
+            { name: "+1 Fruit Storage", rarity: "Gamepass", val: "255M", demand: "10/10", trend: "Overpaid", price: "400", type: "GP", category: "gamepass", img: "https://i.postimg.cc/vHfZWvtr/download-removebg-preview-(21).png" },
             { name: "2x Mastery", rarity: "Gamepass", val: "280M", demand: "10/10", trend: "Overpaid", price: "450", type: "GP", category: "gamepass", img: defaultImg },
-            { name: "2x Money", rarity: "Gamepass", val: "280M", demand: "10/10", trend: "Overpaid", price: "450", type: "GP", category: "gamepass", img: defaultImg },
-            { name: "2x Boss Drops", rarity: "Gamepass", val: "170M", demand: "6/10", trend: "Overpaid", price: "350", type: "GP", category: "gamepass", img: defaultImg },
-            { name: "Fast Boats", rarity: "Gamepass", val: "170M", demand: "9/10", trend: "Overpaid", price: "350", type: "GP", category: "gamepass", img: defaultImg }
+            { name: "2x Money", rarity: "Gamepass", val: "280M", demand: "10/10", trend: "Overpaid", price: "450", type: "GP", category: "gamepass", img: "https://i.postimg.cc/wjzTFsw-m/download-removebg-preview-(17).png" },
+            { name: "2x Boss Drops", rarity: "Gamepass", val: "170M", demand: "6/10", trend: "Overpaid", price: "350", type: "GP", category: "gamepass", img: "https://i.postimg.cc/7Y0ZgNnN/download-removebg-preview-(18).png" },
+            { name: "Fast Boats", rarity: "Gamepass", val: "170M", demand: "9/10", trend: "Overpaid", price: "350", type: "GP", category: "gamepass", img: "https://i.postimg.cc/ZKp5rLxF/download-removebg-preview-(19).png" }
         ];
 
         // --- RENDER LOGIC ---
         const container = document.getElementById("container");
         const searchInput = document.getElementById("search");
+
+        function parseVal(str) {
+            str = String(str).toUpperCase().replace(/,/g, '');
+            if(str.includes('B')) return parseFloat(str) * 1_000_000_000;
+            if(str.includes('M')) return parseFloat(str) * 1_000_000;
+            if(str.includes('K')) return parseFloat(str) * 1_000;
+            return parseFloat(str) || 0;
+        }
+        function formatVal(num) {
+            if(num >= 1e9) return (num/1e9).toFixed(2) + 'B';
+            if(num >= 1e6) return (num/1e6).toFixed(1) + 'M';
+            if(num >= 1e3) return (num/1e3).toFixed(0) + 'K';
+            return num;
+        }
+
+        // Auto Robux Price estimator
+        function getPermPrice(rarity) {
+            if(rarity === "Mythical") return "4K R$";
+            if(rarity === "Legendary") return "2K R$";
+            if(rarity === "Rare") return "1.2K R$";
+            return "500 R$";
+        }
 
         function render(dataset) {
             container.innerHTML = "";
@@ -221,12 +240,20 @@
                 const isSpecial = (item.category === 'limited' || item.category === 'gamepass');
                 const bgClass = `bg-${item.rarity}`;
                 
-                // Color Logic
+                // Colors
                 let demClass = item.demand.includes('10') ? "demand-10" : (item.demand.includes('1') ? "demand-low" : "demand-mid");
                 
                 let displayPrice = item.price;
                 if(item.category === 'fruit') displayPrice = "$" + item.price;
                 if(item.category === 'gamepass' || item.category === 'limited') displayPrice = "R$ " + item.price;
+
+                // Auto Calc Perm Stats
+                let permVal = "N/A";
+                let permPrice = getPermPrice(item.rarity);
+                if(!isSpecial && item.val !== "N/A") {
+                    let rValNum = parseVal(item.val);
+                    permVal = formatVal(rValNum * 40); // 40x Multiplier for Perm Value
+                }
 
                 // Button HTML
                 let toggleHtml = `<div style="height: 25px; margin-bottom:15px;"></div>`;
